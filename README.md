@@ -1,0 +1,1 @@
+## Laravel Jquery Ajax file upload with progress bar
