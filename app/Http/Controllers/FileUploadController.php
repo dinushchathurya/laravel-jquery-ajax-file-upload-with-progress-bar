@@ -14,7 +14,7 @@ class FileUploadController extends Controller
     }
 
     /* upload file to server*/
-    public function upload()
+    public function upload(Request $request)
     {
         $request->validate([
             'file' => 'required',
