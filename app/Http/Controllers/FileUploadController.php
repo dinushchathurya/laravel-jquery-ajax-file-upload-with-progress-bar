@@ -12,4 +12,35 @@ class FileUploadController extends Controller
     {
         return view('welcome');
     }
+
+    /* upload file to server*/
+    public function upload()
+    {
+        $request->validate([
+            'file' => 'required',
+        ]);
+
+        $name = time().'.'.request()->file->getClientOriginalExtension();
+        $request->file->move(public_path('uploads'), $name);
+
+        try {
+            $file = new FileUpload;
+            $file->name = $name;
+            $file->save();
+
+            return response()->json([
+                'success'=> true,
+                'message'=> 'Successfully uploaded.'
+            ]);
+
+        } catch (\Exception $e) {
+
+            return response()->json([
+                'success'=> false,
+                'message'=> 'Something went wrong'
+            ]);
+            
+        }
+       
+    }
 }
